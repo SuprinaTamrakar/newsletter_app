@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h4 class="mt-4 display-4">Listing Newsletters</h4>
+  </div>
+  <%= link_to "Create Newsletter", newsletters_new_path %>
+  <% if @newsletters.present? %>
+    <div class="row justify-content-center">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Article</th>
+            <th scope="col" colspan="3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @newsletters.each do |newsletter| %>
+            <tr>
+              <td><%= newsletter.title %></td>
+              <td><%= newsletter.description %></td>
+              <td><%= newsletter.image %></td>
+              <td><%= newsletter.article %></td>
+              <td><%= link_to "Show", newsletters_show_path(newsletter.id) %></td>       
+              <td><%= link_to "Edit", newsletters_edit_path(newsletter.id) %></td>
+              <td><%= link_to "Delete",
+              newsletters_path(newsletter.id),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" } %>
+        </td>       
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="p-3 mb-2 bg-light text-dark">
+      <span class="text-info font-weight-bold">Welcome! </span>
+      Create your first newsletter
+    </div>
+  <% end %>
+</div>
